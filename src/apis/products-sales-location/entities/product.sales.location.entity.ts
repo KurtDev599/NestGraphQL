@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Field, Int } from '@nestjs/graphql';
 
-@Entity()
+@Entity({ name: 'PRODUCT_SALES_LOCATION' })
 export class ProductSalesLocation {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String)
