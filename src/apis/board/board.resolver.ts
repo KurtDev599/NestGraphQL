@@ -14,7 +14,6 @@ export class BoardResolver {
 
   @Mutation(() => String)
   createBoard(@Args('createBoardInput') createBoardInput: CreateBoardInput) {
-    console.log(createBoardInput);
-    return this.boardService.createBoard();
+    return this.boardService.createBoard(createBoardInput);
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateBoardInput } from './dto/createBoard.input';
 
 @Injectable()
 export class BoardService {
@@ -12,7 +13,8 @@ export class BoardService {
     return result;
   }
 
-  createBoard() {
+  createBoard(createBoardInput: CreateBoardInput) {
+    console.log(createBoardInput);
     return 'success';
   }
 }
