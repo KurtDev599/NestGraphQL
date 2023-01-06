@@ -17,8 +17,4 @@ export class BoardService {
     console.log(createBoardInput);
     return 'success';
   }
-
-  findByBoardId(id: number) {
-    return null;
-  }
 }

@@ -12,11 +12,6 @@ export class BoardResolver {
     return this.boardService.findAll();
   }
 
-  @Query(() => Board)
-  findByBoardId() {
-    // return this.boardService.findByBoardId();
-  }
-
   @Mutation(() => String)
   createBoard(@Args('createBoardInput') createBoardInput: CreateBoardInput) {
     return this.boardService.createBoard(createBoardInput);
