@@ -13,13 +13,18 @@ export class ProductCategoryResolver {
     return this.productCategoryService.findAllCategory();
   }
 
+  @Query(() => ProductCategory)
+  findByIdCategory(@Args('categoryId') categoryId: string) {
+    return this.productCategoryService.findByIdCategory(categoryId);
+  }
+
   @Mutation(() => ProductCategory)
   createProductCategory(@Args('name') name: string) {
-    return this.productCategoryService.createProductCategory({ name });
+    return this.productCategoryService.createProductCategory(name);
   }
 
   @Mutation(() => Boolean)
   deleteProductCategory(@Args('id') id: string) {
-    return this.productCategoryService.deleteProductCategory({ id });
+    return this.productCategoryService.deleteProductCategory(id);
   }
 }

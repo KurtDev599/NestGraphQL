@@ -14,25 +14,32 @@ export class ProductCategoryService {
     return await this.productCategoryRepository.find();
   }
 
-  async createProductCategory({ name }) {
+  async findByIdCategory(categoryId) {
+    const result = await this.productCategoryRepository.findOne({
+      where: { id: categoryId },
+    });
+    if (!result) {
+      throw new HttpException(
+        '존재하지 않는 카테고리입니다.',
+        HttpStatus.BAD_REQUEST,
+      );
+    } else {
+      return result;
+    }
+  }
+
+  async createProductCategory(name) {
     const result = await this.productCategoryRepository.save({
       name,
     });
     return result;
   }
 
-  async deleteProductCategory({ id }) {
-    const category = await this.productCategoryRepository.findOne({
-      where: { id: id },
-    });
-    if (!category) {
-      throw new HttpException(
-        '존재하지 않는 카테고리입니다.',
-        HttpStatus.CONFLICT,
-      );
-    } else {
+  async deleteProductCategory(id) {
+    const category = await this.findByIdCategory(id);
+    if (category) {
       await this.productCategoryRepository.remove(category);
+      return true;
     }
-    return true;
   }
 }

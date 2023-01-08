@@ -22,8 +22,8 @@ export class ProductService {
 
     if (!product) {
       throw new HttpException(
-        '존재하지 않는 카테고리입니다.',
-        HttpStatus.CONFLICT,
+        '존재하지 않는 상품입니다.',
+        HttpStatus.BAD_REQUEST,
       );
     } else {
       return product;
@@ -46,26 +46,13 @@ export class ProductService {
       id: productId,
       ...updateProductInput,
     };
-
-    if (!product) {
-      throw new HttpException(
-        '존재하지 않는 카테고리입니다.',
-        HttpStatus.CONFLICT,
-      );
-    } else {
-      return await this.productRepository.save(newProduct);
-    }
+    return await this.productRepository.save(newProduct);
   }
 
   async checkSoldout({ productId }) {
-    const proudct = await this.productRepository.findOne({
-      where: { id: productId },
-    });
+    const proudct = await this.findIdProduct({ productId });
     if (proudct.isSoldOut) {
-      throw new HttpException(
-        '판매된 상품입니다.',
-        HttpStatus.UNPROCESSABLE_ENTITY,
-      );
+      throw new HttpException('판매된 상품입니다.', HttpStatus.BAD_REQUEST);
     }
   }
 }
