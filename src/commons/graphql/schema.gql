@@ -9,12 +9,19 @@ type Board {
   contents: String!
 }
 
+type ProductCategory {
+  id: String!
+  name: String!
+}
+
 type Query {
   findAllBoards: [Board!]!
 }
 
 type Mutation {
   createBoard(createBoardInput: CreateBoardInput!): String!
+  createProductCategory(name: String!): ProductCategory!
+  deleteProductCategory(id: String!): Boolean!
 }
 
 input CreateBoardInput {
