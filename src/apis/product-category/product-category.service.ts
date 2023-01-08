@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ProductCategory } from './entities/product-category.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,8 +11,7 @@ export class ProductCategoryService {
   ) {}
 
   async findAllCategory() {
-    const result = await this.productCategoryRepository.find();
-    return result;
+    return await this.productCategoryRepository.find();
   }
 
   async createProductCategory({ name }) {
@@ -24,10 +23,13 @@ export class ProductCategoryService {
 
   async deleteProductCategory({ id }) {
     const category = await this.productCategoryRepository.findOne({
-      where: { id },
+      where: { id: id },
     });
     if (!category) {
-      throw new Error('Category not found!');
+      throw new HttpException(
+        '존재하지 않는 카테고리입니다.',
+        HttpStatus.CONFLICT,
+      );
     } else {
       await this.productCategoryRepository.remove(category);
     }
