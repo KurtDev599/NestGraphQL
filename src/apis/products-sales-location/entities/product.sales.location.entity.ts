@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Field, Int } from '@nestjs/graphql';
+import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 
 @Entity({ name: 'PRODUCT_SALES_LOCATION' })
+@ObjectType()
 export class ProductSalesLocation {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => String)
@@ -16,11 +17,11 @@ export class ProductSalesLocation {
   addressDetail: string;
 
   @Column({ type: 'decimal' })
-  @Field(() => Int)
+  @Field(() => Float)
   lat: number;
 
   @Column({ type: 'decimal' })
-  @Field(() => Int)
+  @Field(() => Float)
   lng: number;
 
   @Column()

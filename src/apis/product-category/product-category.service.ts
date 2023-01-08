@@ -10,6 +10,11 @@ export class ProductCategoryService {
     private readonly productCategoryRepository: Repository<ProductCategory>,
   ) {}
 
+  async findAllCategory() {
+    const result = await this.productCategoryRepository.find();
+    return result;
+  }
+
   async createProductCategory({ name }) {
     const result = await this.productCategoryRepository.save({
       name,
