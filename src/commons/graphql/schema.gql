@@ -47,6 +47,7 @@ type Product {
   description: String!
   price: Int!
   isSoldOut: Boolean!
+  isDeleted: Boolean!
   productSalesLocation: ProductSalesLocation!
   productCategory: ProductCategory!
   user: User!
@@ -65,6 +66,7 @@ type Mutation {
   createBoard(createBoardInput: CreateBoardInput!): String!
   createProduct(createProductInput: CreateProductInput!): Product!
   updateProduct(productId: String!, updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(productId: String!): Boolean!
   createProductCategory(name: String!): ProductCategory!
   deleteProductCategory(id: String!): Boolean!
 }

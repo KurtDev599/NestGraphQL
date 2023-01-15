@@ -17,7 +17,7 @@ export class ProductService {
 
   async findIdProduct({ productId }) {
     const product = await this.productRepository.findOne({
-      where: { id: productId },
+      where: { id: productId, isDeleted: false },
     });
 
     if (!product) {
@@ -54,5 +54,12 @@ export class ProductService {
     if (proudct.isSoldOut) {
       throw new HttpException('판매된 상품입니다.', HttpStatus.BAD_REQUEST);
     }
+  }
+
+  async deleteProduct({ productId }) {
+    await this.findIdProduct({ productId });
+    const result = await this.productRepository.softDelete({ id: productId });
+    await this.productRepository.update({ id: productId }, { isDeleted: true });
+    return result.affected ? true : false;
   }
 }
