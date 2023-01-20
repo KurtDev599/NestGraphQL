@@ -45,7 +45,7 @@ export class Product {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @JoinColumn()
+  @JoinColumn({ name: 'productSalesLocationID' })
   @OneToOne(() => ProductSalesLocation)
   @Field(() => ProductSalesLocation)
   productSalesLocation: ProductSalesLocation;

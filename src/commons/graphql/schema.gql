@@ -80,11 +80,21 @@ input CreateBoardInput {
 input CreateProductInput {
   name: String!
   description: String!
+  productSalesLocation: ProductSalesLocationInput!
   price: Int!
+}
+
+input ProductSalesLocationInput {
+  address: String!
+  addressDetail: String!
+  lat: Float!
+  lng: Float!
+  meetingTime: DateTime!
 }
 
 input UpdateProductInput {
   name: String
   description: String
+  productSalesLocation: ProductSalesLocationInput
   price: Int
 }
