@@ -37,13 +37,13 @@ export class ProductService {
   async createProduct(createProductInput: CreateProductInput) {
     const { productSalesLocation, ...product } = createProductInput;
 
-    const saveProduct = await this.productSalesLocationRepository.save({
+    const saveSalesLocation = await this.productSalesLocationRepository.save({
       ...productSalesLocation,
     });
 
     const result = await this.productRepository.save({
       ...product,
-      productSalesLocation: saveProduct,
+      productSalesLocation: saveSalesLocation,
     });
 
     return result;
