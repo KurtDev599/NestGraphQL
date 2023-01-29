@@ -60,7 +60,7 @@ export class Product {
   user: User;
 
   @JoinTable({
-    name: 'PRODUCT_PRODUCT_TAG',
+    name: 'PRODUCT_TAG_DETAIL',
     joinColumn: {
       name: 'productId',
       referencedColumnName: 'id',

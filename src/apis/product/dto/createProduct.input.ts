@@ -17,6 +17,9 @@ export class CreateProductInput {
   @Field(() => ProductCategoryInput)
   productCategory: ProductCategoryInput;
 
+  @Field(() => [String])
+  productTags: string[];
+
   @Field(() => Int)
   @Min(0)
   price: number;
