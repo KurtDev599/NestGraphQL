@@ -50,6 +50,7 @@ export class Product {
   @Field(() => ProductSalesLocation)
   productSalesLocation: ProductSalesLocation;
 
+  @JoinColumn({ name: 'productCategoryId' })
   @ManyToOne(() => ProductCategory)
   @Field(() => ProductCategory)
   productCategory: ProductCategory;

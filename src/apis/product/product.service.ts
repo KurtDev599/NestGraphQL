@@ -16,12 +16,15 @@ export class ProductService {
   ) {}
 
   async findAllProduct() {
-    return await this.productRepository.find();
+    return await this.productRepository.find({
+      relations: ['productSalesLocation', 'productCategory'],
+    });
   }
 
   async findIdProduct({ productId }) {
     const product = await this.productRepository.findOne({
       where: { id: productId, isDeleted: false },
+      relations: ['productSalesLocation', 'productCategory'],
     });
 
     if (!product) {
@@ -35,7 +38,8 @@ export class ProductService {
   }
 
   async createProduct(createProductInput: CreateProductInput) {
-    const { productSalesLocation, ...product } = createProductInput;
+    const { productSalesLocation, productCategory, ...product } =
+      createProductInput;
 
     const saveSalesLocation = await this.productSalesLocationRepository.save({
       ...productSalesLocation,
@@ -44,6 +48,7 @@ export class ProductService {
     const result = await this.productRepository.save({
       ...product,
       productSalesLocation: saveSalesLocation,
+      productCategory: productCategory,
     });
 
     return result;
@@ -57,6 +62,7 @@ export class ProductService {
       id: productId,
       ...updateProductInput,
     };
+
     return await this.productRepository.save(newProduct);
   }
 
