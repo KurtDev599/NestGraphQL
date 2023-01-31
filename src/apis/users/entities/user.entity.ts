@@ -10,7 +10,7 @@ export class User {
 
   @Column()
   @Field(() => String)
-  emil: string;
+  email: string;
 
   @Column()
   @Field(() => String)
