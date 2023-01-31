@@ -19,4 +19,8 @@ export class User {
   @Column()
   @Field(() => String)
   password: string;
+
+  @Column()
+  @Field(() => Number)
+  age: number;
 }
