@@ -14,10 +14,10 @@ export class CreateProductInput {
   @Field(() => ProductSalesLocationInput)
   productSalesLocation: ProductSalesLocationInput;
 
-  @Field(() => ProductCategoryInput)
+  @Field(() => ProductCategoryInput, { nullable: true })
   productCategory: ProductCategoryInput;
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   productTags: string[];
 
   @Field(() => Int)
