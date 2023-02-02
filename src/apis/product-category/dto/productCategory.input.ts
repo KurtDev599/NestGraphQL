@@ -1,5 +1,4 @@
-import { Field, InputType, PickType } from '@nestjs/graphql';
-import { Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class ProductCategoryInput {
