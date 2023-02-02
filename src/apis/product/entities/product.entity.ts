@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   DeleteDateColumn,
   Entity,
   JoinColumn,
@@ -44,6 +45,9 @@ export class Product {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @CreateDateColumn()
+  createDateTime: Date;
 
   @JoinColumn({ name: 'productSalesLocationID' })
   @OneToOne(() => ProductSalesLocation)
