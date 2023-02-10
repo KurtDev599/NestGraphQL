@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 
 @Entity({ name: 'PRODUCT_SALES_LOCATION' })
@@ -27,4 +33,7 @@ export class ProductSalesLocation {
   @Column()
   @Field(() => Date)
   meetingTime: Date;
+
+  @CreateDateColumn()
+  createDateTime: Date;
 }

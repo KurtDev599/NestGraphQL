@@ -51,20 +51,24 @@ export class ProductService {
     });
 
     const saveProductTags = [];
-    for (let i = 0; i < productTags.length; i++) {
-      const tagName = productTags[i].replace('#', '');
+    if (productTags) {
+      for (let i = 0; i < productTags.length; i++) {
+        const tagName = productTags[i].replace('#', '');
 
-      // 등록된 태그인지 확인
-      // TODO: promise.all, for await of 등 성능개선 예정
-      const prevTag = await this.productTagRepository.findOne({
-        where: { name: tagName },
-      });
+        // 등록된 태그인지 확인
+        // TODO: promise.all, for await of 등 성능개선 예정
+        const prevTag = await this.productTagRepository.findOne({
+          where: { name: tagName },
+        });
 
-      if (prevTag) {
-        saveProductTags.push(prevTag);
-      } else {
-        const newTag = await this.productTagRepository.save({ name: tagName });
-        saveProductTags.push(newTag);
+        if (prevTag) {
+          saveProductTags.push(prevTag);
+        } else {
+          const newTag = await this.productTagRepository.save({
+            name: tagName,
+          });
+          saveProductTags.push(newTag);
+        }
       }
     }
 

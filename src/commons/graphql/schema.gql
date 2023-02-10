@@ -71,6 +71,7 @@ type Mutation {
   createProductCategory(name: String!): ProductCategory!
   deleteProductCategory(id: String!): Boolean!
   createUser(email: String!, password: String!, name: String!, age: Float!): User!
+  updateSalesLocation(updateSalesLocation: updateSalesLocationInput!, salesLocationId: String!): ProductSalesLocation!
 }
 
 input CreateBoardInput {
@@ -83,8 +84,8 @@ input CreateProductInput {
   name: String!
   description: String!
   productSalesLocation: ProductSalesLocationInput!
-  productCategory: ProductCategoryInput!
-  productTags: [String!]!
+  productCategory: ProductCategoryInput
+  productTags: [String!]
   price: Int!
 }
 
@@ -107,4 +108,12 @@ input UpdateProductInput {
   productCategory: ProductCategoryInput
   productTags: [String!]
   price: Int
+}
+
+input updateSalesLocationInput {
+  address: String
+  addressDetail: String
+  lat: Float
+  lng: Float
+  meetingTime: DateTime
 }
