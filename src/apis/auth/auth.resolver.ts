@@ -16,7 +16,7 @@ export class AuthResolver {
     @Args('email') email: string,
     @Args('password') password: string,
   ) {
-    const user = await this.userService.findOneUser({ email });
+    const user = await this.userService.findOneUserEmail({ email });
     const isAuth = await bcrypt.compare(password, user.password);
 
     if (!user || !isAuth) {

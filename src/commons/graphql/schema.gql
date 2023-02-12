@@ -34,6 +34,7 @@ type User {
   name: String!
   password: String!
   age: Float!
+  isDeleted: String!
 }
 
 type ProductTag {
@@ -71,6 +72,7 @@ type Mutation {
   createProductCategory(name: String!): ProductCategory!
   deleteProductCategory(id: String!): Boolean!
   createUser(email: String!, password: String!, name: String!, age: Float!): User!
+  deleteUser(id: String!): Boolean!
   login(email: String!, password: String!): String!
   updateSalesLocation(updateSalesLocation: updateSalesLocationInput!, salesLocationId: String!): ProductSalesLocation!
 }

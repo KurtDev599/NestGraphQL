@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @Entity({ name: 'USER' })
@@ -23,4 +29,14 @@ export class User {
   @Column()
   @Field(() => Number)
   age: number;
+
+  @Column({ default: 'N' })
+  @Field(() => String)
+  isDeleted: string;
+
+  @CreateDateColumn()
+  createDateTime: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

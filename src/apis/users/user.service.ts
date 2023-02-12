@@ -12,7 +12,7 @@ export class UserService {
   ) {}
 
   async createUser({ email, password, name, age }) {
-    const user = await this.findOneUser({ email });
+    const user = await this.findOneUserEmail({ email });
 
     if (user) {
       throw new HttpException('이미 등록된 이메일입니다.', HttpStatus.CONFLICT);
@@ -26,7 +26,27 @@ export class UserService {
     }
   }
 
-  async findOneUser({ email }) {
+  async findOneUserEmail({ email }) {
     return await this.userRepository.findOne({ where: { email: email } });
+  }
+
+  async findOneUserId({ id }) {
+    return await this.userRepository.findOne({ where: { id: id } });
+  }
+
+  async deleteUser({ id }) {
+    const user = await this.findOneUserId({ id });
+
+    if (!user) {
+      throw new HttpException(
+        '존재하지 않는 이메일 입니다.',
+        HttpStatus.CONFLICT,
+      );
+    }
+    const result = await this.userRepository.softDelete({ id: id });
+    if (result) {
+      await this.userRepository.update({ id: id }, { isDeleted: 'Y' });
+    }
+    return result.affected ? true : false;
   }
 }
