@@ -9,6 +9,7 @@ import { ProductCategoryModule } from './apis/product-category/product-category.
 import { ProductTagModule } from './apis/product-tag/product-tag.module';
 import { UsersModule } from './apis/users/users.module';
 import { AuthModule } from './apis/auth/auth.module';
+import DatabaseLogger from './commons/databaseLogger';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { AuthModule } from './apis/auth/auth.module';
       database: 'graphql',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
-      logging: true,
+      logger: new DatabaseLogger(),
     }),
   ],
 })
