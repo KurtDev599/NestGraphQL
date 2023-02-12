@@ -11,7 +11,7 @@ export class AuthResolver {
     private readonly authService: AuthService,
   ) {}
 
-  @Mutation()
+  @Mutation(() => String)
   async login(
     @Args('email') email: string,
     @Args('password') password: string,
@@ -19,13 +19,13 @@ export class AuthResolver {
     const user = await this.userService.findOneUser({ email });
     const isAuth = await bcrypt.compare(password, user.password);
 
-    if (!user || isAuth) {
+    if (!user || !isAuth) {
       throw new HttpException(
         '이메일 또는 비밀번호를 잘못 입력했습니다.',
         HttpStatus.CONFLICT,
       );
     }
 
-    return this.authService.getAccessToken();
+    return this.authService.getAccessToken({ user });
   }
 }
