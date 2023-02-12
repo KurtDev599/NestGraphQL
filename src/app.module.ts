@@ -8,6 +8,7 @@ import { ProductsSalesLocationModule } from './apis/products-sales-location/prod
 import { ProductCategoryModule } from './apis/product-category/product-category.module';
 import { ProductTagModule } from './apis/product-tag/product-tag.module';
 import { UsersModule } from './apis/users/users.module';
+import { AuthModule } from './apis/auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UsersModule } from './apis/users/users.module';
     ProductCategoryModule,
     ProductTagModule,
     UsersModule,
+    AuthModule,
     ProductsSalesLocationModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,

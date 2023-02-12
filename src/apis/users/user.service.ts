@@ -11,7 +11,7 @@ export class UserService {
   ) {}
 
   async createUser({ email, password, name, age }) {
-    const user = await this.userRepository.findOne({ where: { email: email } });
+    const user = this.findOneUser({ email });
 
     if (user) {
       throw new HttpException('이미 등록된 이메일입니다.', HttpStatus.CONFLICT);
@@ -23,5 +23,9 @@ export class UserService {
         age,
       });
     }
+  }
+
+  async findOneUser({ email }) {
+    return await this.userRepository.findOne({ where: { email: email } });
   }
 }
