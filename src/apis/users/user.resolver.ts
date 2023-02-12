@@ -14,7 +14,9 @@ export class UserResolver {
     @Args('name') name: string,
     @Args('age') age: number,
   ) {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const saltRounds = 10;
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hashedPassword = await bcrypt.hash(password, salt);
     return this.userService.createUser({
       email,
       password: hashedPassword,
