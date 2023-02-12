@@ -3,7 +3,6 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { GqlAuthGuard } from '../../commons/auth/gql-auth.guard';
 import { CurrentUser } from '../../commons/auth/gql-user.param';
 
