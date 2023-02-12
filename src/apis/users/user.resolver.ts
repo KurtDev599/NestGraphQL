@@ -18,12 +18,12 @@ export class UserResolver {
     return this.userService.findOneUserId({ id });
   }
 
-  @UseGuards(GqlAuthGuard)
-  @Query(() => String)
-  fetchUser(@CurrentUser() currentUser: User) {
-    console.log(currentUser);
-    return 'hello';
-  }
+  // @UseGuards(GqlAuthGuard)
+  // @Query(() => String)
+  // fetchUser(@CurrentUser() currentUser: User) {
+  //   console.log(currentUser);
+  //   return 'hello';
+  // }
 
   @Mutation(() => User)
   async createUser(
