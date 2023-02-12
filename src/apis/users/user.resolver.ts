@@ -1,4 +1,4 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
@@ -6,6 +6,11 @@ import * as bcrypt from 'bcrypt';
 @Resolver()
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
+
+  @Query(() => User)
+  findOneUserId(@Args('id') id: string) {
+    return this.userService.findOneUserId({ id });
+  }
 
   @Mutation(() => User)
   async createUser(

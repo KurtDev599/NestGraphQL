@@ -62,6 +62,7 @@ type Query {
   findIdProduct(productId: String!): Product!
   findAllCategory: [ProductCategory!]!
   findByIdCategory(categoryId: String!): ProductCategory!
+  findOneUserId(id: String!): User!
 }
 
 type Mutation {
