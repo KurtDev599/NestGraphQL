@@ -5,9 +5,21 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { UserService } from '../users/user.service';
+import { JwtAccessStrategy } from '../../commons/auth/jwt-access.strategy';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
-  imports: [JwtModule.register({}), TypeOrmModule.forFeature([User])],
-  providers: [AuthResolver, AuthService, UserService],
+  imports: [
+    JwtModule.register({
+      secret: 'myAccessKey',
+      signOptions: {
+        expiresIn: 60 * 2,
+      },
+    }),
+    TypeOrmModule.forFeature([User]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
+  providers: [AuthResolver, AuthService, UserService, JwtAccessStrategy],
+  exports: [PassportModule],
 })
 export class AuthModule {}
