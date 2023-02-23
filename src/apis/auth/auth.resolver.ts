@@ -1,8 +1,10 @@
 import { Args, Context, Mutation, Resolver } from '@nestjs/graphql';
 import { UserService } from '../users/user.service';
 import { AuthService } from './auth.service';
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
+import { GqlAuthRefreshGuard } from '../../commons/auth/gql-auth.guard';
+import { CurrentUser } from '../../commons/auth/gql-user.param';
 
 @Resolver()
 export class AuthResolver {
@@ -32,5 +34,11 @@ export class AuthResolver {
 
     // 토큰 발급
     return this.authService.getAccessToken({ user });
+  }
+
+  @UseGuards(GqlAuthRefreshGuard)
+  @Mutation(() => String)
+  restoreAccessToken(@CurrentUser() currentUser: any) {
+    return this.authService.getAccessToken({ user: currentUser });
   }
 }

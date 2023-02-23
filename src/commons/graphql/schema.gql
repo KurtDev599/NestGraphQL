@@ -75,6 +75,7 @@ type Mutation {
   createUser(email: String!, password: String!, name: String!, age: Float!): User!
   deleteUser(id: String!): Boolean!
   login(email: String!, password: String!): String!
+  restoreAccessToken: String!
   updateSalesLocation(updateSalesLocation: updateSalesLocationInput!, salesLocationId: String!): ProductSalesLocation!
 }
 
