@@ -3,8 +3,8 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
-  @UseGuards(AuthGuard('google'))
   @Get('/login/google')
+  @UseGuards(AuthGuard('google'))
   // google login
   loginGoogle() {}
 }
