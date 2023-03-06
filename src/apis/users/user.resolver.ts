@@ -42,7 +42,14 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
+  @UseGuards(GqlAuthGuard)
   async deleteUser(@Args('id') id: string) {
     return this.userService.deleteUser({ id });
+  }
+
+  @Query(() => User)
+  @UseGuards(GqlAuthGuard)
+  async getUserInfo(@CurrentUser() currentUser: User) {
+    return currentUser;
   }
 }

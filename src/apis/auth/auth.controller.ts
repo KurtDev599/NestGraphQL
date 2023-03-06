@@ -6,5 +6,7 @@ export class AuthController {
   @Get('/login/google')
   @UseGuards(AuthGuard('google'))
   // google login
-  loginGoogle() {}
+  loginGoogle() {
+    return null;
+  }
 }
