@@ -24,6 +24,9 @@ export class AuthController {
       });
     }
 
+    // this.authService.setRefreshToken({ user, res })
+    // res.redirect('http://localhost:8080/src/apis/auth/test.html');
+
     return null;
   }
 }

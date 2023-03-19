@@ -17,7 +17,7 @@ export class jwtSocialGoogleStrategy extends PassportStrategy(
     super({
       clientID: '',
       clientSecret: '',
-      callbackURL: '',
+      callbackURL: '', // 호출 api
       scope: ['email', 'profile'],
     });
   }
